@@ -9,7 +9,7 @@ public class Specification {
     }
 
     public void setModel(String model) {
-        System.out.println("setter iis callerd 1");
+        System.out.println("setter iis callerd 1 t ");
         this.model = model;
     }
 
@@ -18,7 +18,7 @@ public class Specification {
     }
 
     public void setMake(String make) {
-        System.out.println("setter iis callerd 2");
+        System.out.println("setter iis callerd 2 t");
         this.make = make;
     }
 
