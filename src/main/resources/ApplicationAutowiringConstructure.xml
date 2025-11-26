@@ -5,7 +5,10 @@
         http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- bean definitions here -->
-    <bean id="myBean" class="car.example.bean.Mybean">
-        <property name="message" value=" I am first bean here ,hello from XML config "/>
-            </bean>
+    <bean id="specification" class="car.autowiring.constructure.Specification">
+        <property name="make" value=" suv by  Constructure"/>
+        <property name="model" value="corolla by  Constructure"/>
+    </bean>
+
+    <bean id="mycar" class="car.autowiring.constructure.Car" autowire="constructor"/>
 </beans>
