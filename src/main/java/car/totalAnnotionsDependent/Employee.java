@@ -1,4 +1,4 @@
-package car.totalAnnoations;
+package car.totalAnnotionsDependent;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -42,6 +42,10 @@ public class Employee {
         return salary;
     }
 
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
 
     @Override
     public String toString() {
@@ -53,7 +57,4 @@ public class Employee {
                 '}';
     }
 
-    public void setSalary(int salary) {
-        this.salary = salary;
-    }
 }

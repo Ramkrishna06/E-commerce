@@ -1,5 +1,4 @@
-package car.totalAnnoations;
-
+package car.totalAnnotionsDependent;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -13,5 +12,9 @@ public class App {
         Employee employee =  context.getBean("employee" , Employee.class);
         System.out.println(employee.toString());
 
+
+        System.out.println("Output by Manager class that is dependent on Employee used autowire annotations to pass reference");
+        Manager manager =  context.getBean("manager", Manager.class);
+        System.out.println(manager.toString());
     }
 }
