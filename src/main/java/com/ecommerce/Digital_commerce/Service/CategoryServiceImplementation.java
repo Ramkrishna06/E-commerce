@@ -1,0 +1,57 @@
+package com.ecommerce.Digital_commerce.Service;
+
+import com.ecommerce.Digital_commerce.Model.Category;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class CategoryServiceImplementation implements CategoryService{
+
+    private  List<Category> categoriesLi = new ArrayList<>();
+     private Long nextID=1L;
+    @Override
+    public List<Category> getAllCategory() {
+        return categoriesLi;
+    }
+
+
+    @Override
+    public void postCategory(Category category) {
+        category.setCategoryID(nextID++);
+        categoriesLi.add(category);  // here no argument constructure is called her jackson a java library to manage JSON it will create new Category();
+        //categoriesLi.add(new Category(11 ,"fs")); instilissed by parematarised constructure
+    }
+
+    @Override
+    public String deleteCategory(Long categoryId) {
+
+//       Optional<Category> categoryopt =categoriesLi.stream().filter(c -> c.getCategoryID().equals(categoryId)).findFirst(); //this will throw null pointer exception if no id is founf
+//
+//       if(categoryopt.isPresent()){
+//           categoriesLi.remove(categoryopt.get());
+//           return " removed ";
+//       }else{
+//           return "not found";
+//       }
+
+
+//       boolean remove = categoriesLi.removeIf(c -> c.getCategoryID().equals(categoryId));
+//       return remove ? "removed " : " not found";
+
+
+
+        //so here we are throwing exception to HTTps request before that we are only sending string not found not https status;
+        Category categoryopt =categoriesLi.stream().
+                filter(c -> c.getCategoryID().equals(categoryId)).
+                findFirst().
+                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"ID not found")); //this is done because restapi throw not found with 200K which means we are only returning the string not the hhtp status.
+           categoriesLi.remove(categoryopt);
+           return "Category removed succefully";
+       }
+    }
