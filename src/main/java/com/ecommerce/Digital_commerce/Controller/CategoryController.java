@@ -52,4 +52,16 @@ public class CategoryController {
             return new ResponseEntity<>( e.getReason(),e.getStatusCode()); //ResponseEntity allows you to wrap respone and get better control
         }
     }
+
+    @PutMapping("api/public/categories/{categoryID}")
+    public ResponseEntity<String> updataCategories(@RequestBody Category category, @PathVariable Long categoryID){
+      //return categoryService.updateCategory(category , categoryID);
+
+        try {
+            String staus = categoryService.updateCategory(category , categoryID);
+            return new ResponseEntity<>(staus,HttpStatus.OK);
+        }catch(ResponseStatusException e){
+            return new ResponseEntity<>(e.getReason(),e.getStatusCode());
+        }
+    }
 }
