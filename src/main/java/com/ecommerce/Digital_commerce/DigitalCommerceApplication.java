@@ -9,6 +9,4 @@ public class DigitalCommerceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DigitalCommerceApplication.class, args);
 	}
-
-
 }

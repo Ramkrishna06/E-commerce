@@ -17,13 +17,14 @@ public class CategoryController {
 
      private  CategoryService categoryService;
 
-
+    //@RequestMapping("all the commen api part her ")
     public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
 
-    @GetMapping("api/public/categories")
+    //@GetMapping("api/public/categories")
+    @RequestMapping(value = "api/public/categories" , method = RequestMethod.GET)
      public ResponseEntity<List<Category>> getCategories(){
         List<Category> allCategory = categoryService.getAllCategory();
          return new ResponseEntity<>(allCategory,HttpStatus.OK);
@@ -38,7 +39,7 @@ public class CategoryController {
 
      }
 
-    @DeleteMapping("api/public/categories/{categoryID}")
+    @DeleteMapping("api/admin/categories/{categoryID}")
     public ResponseEntity<String> postCategories(@PathVariable  Long categoryID){
 
         //by now we are noot hadling exception here  we are noramlly returning string not https status to api ok
@@ -53,7 +54,7 @@ public class CategoryController {
         }
     }
 
-    @PutMapping("api/public/categories/{categoryID}")
+    @PutMapping("api/admin/categories/{categoryID}")
     public ResponseEntity<String> updataCategories(@RequestBody Category category, @PathVariable Long categoryID){
       //return categoryService.updateCategory(category , categoryID);
 
