@@ -40,7 +40,7 @@ public class CategoryController {
      }
 
     @DeleteMapping("api/admin/categories/{categoryID}")
-    public ResponseEntity<String> postCategories(@PathVariable  Long categoryID){
+    public ResponseEntity<String> deleteCategories(@PathVariable  Long categoryID){
 
         //by now we are noot hadling exception here  we are noramlly returning string not https status to api ok
         //return categoryService.deleteCategory(categoryID);
