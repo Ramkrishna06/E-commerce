@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api")   //this is the common end point all the api calls
 public class CategoryController {
 
      private  CategoryService categoryService;
@@ -27,7 +28,7 @@ public class CategoryController {
     @RequestMapping(value = "api/public/categories" , method = RequestMethod.GET)
      public ResponseEntity<List<Category>> getCategories(){
         List<Category> allCategory = categoryService.getAllCategory();
-         return new ResponseEntity<>(allCategory,HttpStatus.OK);
+         return new ResponseEntity<>(allCategory,HttpStatus.OK);    /// here things are different ads we are sending the status code and response
      }
 
 
@@ -36,8 +37,12 @@ public class CategoryController {
      public ResponseEntity<String> postCategories(@RequestBody Category category){
         categoryService.postCategory(category);
         return new ResponseEntity<>("added",HttpStatus.OK);
-
      }
+     
+    @GetMapping("api/public/categories/test")
+    public Category postCategories(@RequestBody String name){
+         return new Category("this is Jackon serilization");
+    }
 
     @DeleteMapping("api/admin/categories/{categoryID}")
     public ResponseEntity<String> deleteCategories(@PathVariable  Long categoryID){
@@ -56,7 +61,7 @@ public class CategoryController {
 
     @PutMapping("api/admin/categories/{categoryID}")
     public ResponseEntity<String> updataCategories(@RequestBody Category category, @PathVariable Long categoryID){
-      //return categoryService.updateCategory(category , categoryID);
+        //return categoryService.updateCategory(category , categoryID);
 
         try {
             String staus = categoryService.updateCategory(category , categoryID);

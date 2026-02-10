@@ -50,6 +50,7 @@ public class CategoryServiceImplementation implements CategoryService {
 //       }else{
 //           return "not found";
 //       }
+
         //so here we are throwing exception to HTTps request before that we are only sending string not found not https status;
 //        Category categoryopt = categoriesLi.stream().
 //                filter(c -> c.getCategoryID().equals(categoryId)).
@@ -68,7 +69,7 @@ public class CategoryServiceImplementation implements CategoryService {
                 orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"ID not found"));
 
         catagoryRepository.delete(category);
-        return "id not found by statement";
+        return "id deleted";
     }
 
     @Override
@@ -85,12 +86,27 @@ public class CategoryServiceImplementation implements CategoryService {
 //        catagoryRepository.save(existingCategory);
 //        return "category updated";
 
-        //using repo things here
 
-        Category newcategory = catagoryRepository.findById(categoryId).
-                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"ID not found"));
-        newcategory.setCategoryName(category.getCategoryName());
-        catagoryRepository.save(category);
+
+        //using repo things here
+//        Category updatecategory = catagoryRepository.findById(categoryId).
+//                orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"ID not found"));
+//
+//        //so here we are setting category name -> we are getting name from @Requestbody(client send as JSON) which is obj so we have to use getter to fetch the name using getter
+//        updatecategory.setCategoryName(category.getCategoryName());
+//        catagoryRepository.save(category);
+
+        // we can use optional<Type>
+
+        Optional<Category> existing = catagoryRepository.findById(categoryId);
+        if(existing.isPresent()){
+            Category existingcategory = existing.get();
+            existingcategory.setCategoryName( category.getCategoryName());
+            catagoryRepository.save(existingcategory);
+        }else{
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND , "id is invalid");
+        }
+
         return "id updated";
     }
 }

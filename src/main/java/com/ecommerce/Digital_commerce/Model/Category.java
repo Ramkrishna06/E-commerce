@@ -19,6 +19,9 @@ public class Category {
     public Category() {
     }
 
+    public Category(String thisIsJackonSerilization) {
+        this.categoryName = thisIsJackonSerilization;
+    }
 
 
     public Long getCategoryID() {
